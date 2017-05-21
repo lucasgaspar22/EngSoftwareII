@@ -1,0 +1,22 @@
+﻿<Window x:Class="Projeto_Google.UnidadeAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projeto_Google"
+        mc:Ignorable="d"
+        Title="Unidades" Height="300" Width="351.465">
+    <Grid>
+        <Button x:Name="cadastrarBtn" Content="Cadastrar" HorizontalAlignment="Left" Margin="218,27,0,0" VerticalAlignment="Top" Width="94" Background="#FF3D82F1" BorderBrush="{x:Null}" Click="CadastrarBtn_Click" />
+        <Button x:Name="proximoBtn" Content="Próximo" HorizontalAlignment="Left" Margin="218,62,0,0" VerticalAlignment="Top" Width="94" Background="#FFF8BB00" BorderBrush="{x:Null}" Click="proximoBtn_Click"/>
+        <Button x:Name="editarBtn" Content="Editar" HorizontalAlignment="Left" Margin="218,98,0,0" VerticalAlignment="Top" Width="94" Background="#FF31A653" BorderBrush="{x:Null}" Click="editarBtn_Click"/>
+        <Button x:Name="excluirBtn" Content="Excluir" HorizontalAlignment="Left" Margin="218,135,0,0" VerticalAlignment="Top" Width="94" Click="excluirBtn_Click"/>
+        <Image x:Name="image1" HorizontalAlignment="Left" Height="76" Margin="64,183,0,0" VerticalAlignment="Top" Width="258" Source="../img/google_PNG19644.png"/>
+        <Label x:Name="label" Content="Nome:" HorizontalAlignment="Left" Margin="22,26,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="País:" HorizontalAlignment="Left" Margin="22,57,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="Estado" HorizontalAlignment="Left" Margin="22,88,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="Cidade:" HorizontalAlignment="Left" Margin="22,119,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="unidadeNome" HorizontalAlignment="Left" Height="23" Margin="72,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

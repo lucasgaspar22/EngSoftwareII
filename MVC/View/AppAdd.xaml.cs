@@ -28,6 +28,8 @@ namespace Projeto_Google
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             listerner = ListernerApps.getInstance();
+            listerner.getAppsBD();
+            listerner.nApps = listerner.apps.Count;
             this.isAdm = isAdm;
         }
         
@@ -89,7 +91,7 @@ namespace Projeto_Google
             else
             {
 
-                listerner.deleteApp();
+                listerner.deleteApp(appNome.Text);
                 appNome.Text = "";
                 appTamanho.Text = "";
                 appNDownload.Text = "";

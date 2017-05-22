@@ -30,6 +30,8 @@ namespace Projeto_Google
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             listerner = ListernerUsuarios.getInstance();
+            listerner.getUsuariosBD();
+            listerner.nUsuarios = listerner.usuarios.Count;
             this.isAdm = isAdm;
         }
 
@@ -94,7 +96,7 @@ namespace Projeto_Google
             }
             else
             {
-                listerner.deleteUsuario();
+                listerner.deleteUsuario(usuarioNome.Text, usuarioEmail.Text);
                 usuarioNome.Text = "";
                 usuarioEmail.Text = "";
                 usuarioIdade.Text = "";

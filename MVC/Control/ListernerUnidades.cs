@@ -13,6 +13,7 @@ namespace Projeto_Google.Control
         public List<Unidades> unidades = new List<Unidades>();
         public int index = 0;
         public int nUnidades = 0;
+        UnidadesDAO unidadeDAO = new UnidadesDAO();
 
         public static ListernerUnidades getInstance()
         {
@@ -24,6 +25,7 @@ namespace Projeto_Google.Control
         public void addUnidade(String nome, String cidade, String estado, String pais)
         {
             Unidades unidade = new Unidades(nome, cidade, estado, pais);
+            unidadeDAO.Cadastrar(nome);
             unidades.Add(unidade);
             nUnidades++;
         }
@@ -35,17 +37,38 @@ namespace Projeto_Google.Control
 
         public void editUnidade(String nome, String cidade, String estado, String pais)
         {
-            unidades.ElementAt(index - 1).Nome = nome;
-            unidades.ElementAt(index - 1).Cidade = cidade;
-            unidades.ElementAt(index - 1).Estado = estado;
-            unidades.ElementAt(index - 1).Pais = pais;
+            if (index - 1 > 0) {
+                string nomeAntigo = unidades.ElementAt(index - 1).Nome;
+                unidades.ElementAt(index - 1).Nome = nome;
+                unidades.ElementAt(index - 1).Cidade = cidade;
+                unidades.ElementAt(index - 1).Estado = estado;
+                unidades.ElementAt(index - 1).Pais = pais;
+                unidadeDAO.Editar(nomeAntigo, nome);
+            }else
+            {
+                string nomeAntigo = unidades.ElementAt(0).Nome;
+                unidades.ElementAt(0).Nome = nome;
+                unidades.ElementAt(0).Cidade = cidade;
+                unidades.ElementAt(0).Estado = estado;
+                unidades.ElementAt(0).Pais = pais;
+                unidadeDAO.Editar(nomeAntigo, nome);
+            }
         }
 
-        public void deleteUnidade()
+        public void deleteUnidade(string nome)
         {
-            unidades.Remove(unidades.ElementAt(index - 1));
+
+            unidadeDAO.Excluir(nome);
+            if (index - 1 > 0) { unidades.Remove(unidades.ElementAt(index - 1)); }
+            else unidades.Remove(unidades.ElementAt(0));
+            
             index = 0;
             nUnidades--;
+        }
+
+        public void getServicosBD()
+        {
+            unidadeDAO.Listar();
         }
     }
 }

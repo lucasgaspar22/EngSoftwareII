@@ -28,6 +28,8 @@ namespace Projeto_Google
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             listerner = ListernerCargos.getInstance();
+            listerner.getServicosBD();
+            listerner.nCargos = listerner.cargos.Count;
             this.isAdm = isAdm;
         }
 
@@ -70,10 +72,10 @@ namespace Projeto_Google
             }
             else
             {
-                listerner.deleteCargo();
+                listerner.deleteCargo(cargoNome.Text);
                 cargoNome.Text = "";
                 cargoHierarquia.Text = "";
-                cargoHierarquia.Text = "";
+                cargoSalario.Text = "";
                 MessageBox.Show("Item excluido com sucesso!");
             }
             

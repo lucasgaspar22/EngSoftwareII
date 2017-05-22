@@ -13,6 +13,7 @@ namespace Projeto_Google.Control
         public List<Cargos> cargos = new List<Cargos>();
         public int index = 0;
         public int nCargos = 0;
+        CargosDAO cargosDAO = new CargosDAO();
 
         public static ListernerCargos getInstance()
         {
@@ -24,6 +25,7 @@ namespace Projeto_Google.Control
         public void addCargo(String nome, String hierarquia, String salario)
         {
             Cargos cargo = new Cargos(nome, salario, hierarquia);
+            cargosDAO.Cadastrar(nome, salario, hierarquia);
             cargos.Add(cargo);
             nCargos++;
         }
@@ -35,16 +37,44 @@ namespace Projeto_Google.Control
 
         public void editCargo(String nome, String hierarquia, String salario)
         {
-            cargos.ElementAt(index - 1).Nome = nome;
-            cargos.ElementAt(index - 1).Hierarquia = hierarquia;
-            cargos.ElementAt(index - 1).Salario = salario;
+            if (index - 1 > 0)
+            {
+                string nomeAntigo = cargos.ElementAt(index - 1).Nome;
+                cargosDAO.Editar(nomeAntigo, nome, salario, hierarquia);
+                cargos.ElementAt(index - 1).Nome = nome;
+                cargos.ElementAt(index - 1).Hierarquia = hierarquia;
+                cargos.ElementAt(index - 1).Salario = salario;
+
+            }
+            else
+            {
+                string nomeAntigo = cargos.ElementAt(0).Nome;
+                cargosDAO.Editar(nomeAntigo, nome, salario, hierarquia);
+                cargos.ElementAt(0).Nome = nome;
+                cargos.ElementAt(0).Hierarquia = hierarquia;
+                cargos.ElementAt(0).Salario = salario;
+            }
+
         }
 
-        public void deleteCargo()
+        public void deleteCargo(string nome)
         {
-            cargos.Remove(cargos.ElementAt(index - 1));
+            cargosDAO.Excluir(nome);
+            if (index - 1 > 0)
+            {
+                cargos.Remove(cargos.ElementAt(index - 1));
+            }
+            else
+            {
+                cargos.Remove(cargos.ElementAt(0));
+            }
             index = 0;
             nCargos--;
+        }
+
+        public void getServicosBD()
+        {
+            cargosDAO.Listar();
         }
     }
    

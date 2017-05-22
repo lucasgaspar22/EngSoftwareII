@@ -28,6 +28,8 @@ namespace Projeto_Google
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             listerner = ListernerServicos.getInstance();
+            listerner.getServicosBD();
+            listerner.nServicos = listerner.servicos.Count;
             this.isAdm = isAdm;
         }
   
@@ -55,6 +57,7 @@ namespace Projeto_Google
 
             servicoNome.Text = (listerner.getServicos().Nome);
             listerner.index++;
+            listerner.indexBD = listerner.index - 1;
             if (listerner.index >= listerner.nServicos)
             {
                 MessageBox.Show("Todos os elementos listados");
@@ -76,7 +79,7 @@ namespace Projeto_Google
             }
             else
             {
-                listerner.deleteServicos();
+                listerner.deleteServicos(servicoNome.Text);
                 servicoNome.Text = "";
                 MessageBox.Show("Item excluido com sucesso!");
             }

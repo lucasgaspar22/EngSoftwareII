@@ -28,6 +28,8 @@ namespace Projeto_Google
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             listerner = ListernerFuncionarios.getInstance();
+            listerner.getFuncionariosBD();
+            listerner.nFuncionarios = listerner.funcionarios.Count;
             this.isAdm = isAdm;
         }
         
@@ -87,7 +89,7 @@ namespace Projeto_Google
             }
             else
             {
-                listerner.deleteFuncionario();
+                listerner.deleteFuncionario( funcionarioNome.Text, funcionarioEmail.Text);
                 funcionarioNome.Text = "";
                 funcionarioEmail.Text = "";
                 funcionarioIdade.Text = "";

@@ -11,6 +11,10 @@ namespace Projeto_Google.Control
     {
 
         public static ListernerApps sinstance;
+        public List<Apps> apps = new List<Apps>();
+        public int index = 0;
+        public int nApps = 0;
+        AppsDAO appsDao = new AppsDAO();
 
         public static ListernerApps getInstance()
         {
@@ -19,13 +23,11 @@ namespace Projeto_Google.Control
             throw new NotImplementedException();
         }
 
-        public List<Apps> apps = new List<Apps>();
-        public int index = 0;
-        public int nApps = 0;
 
         public void addApp( String nome, String tamanho, String downloads, String avaliacao)
         {
-            Apps app = new Apps(nome, tamanho, downloads, avaliacao);
+            Apps app = new Apps(nome, tamanho, downloads, avaliacao); //Int32.Parse(downloads)
+            appsDao.Cadastrar(nome, tamanho,downloads , avaliacao);
             apps.Add(app);
             nApps++;
         }
@@ -37,18 +39,44 @@ namespace Projeto_Google.Control
 
         public void editApp(String nome, String tamanho, String downloads, String avaliacao)
         {
-            (apps.ElementAt(index - 1).Nome) = nome;
-            (apps.ElementAt(index - 1).Tamanho) = tamanho;
-            (apps.ElementAt(index - 1).NumDownloads) = downloads;
-            (apps.ElementAt(index - 1).Avaliacao) = avaliacao;
-
+            if (index - 1 > 0)
+            { 
+                string nomeAntigo = (apps.ElementAt(index - 1).Nome);
+                string tamanhoAntigo = (apps.ElementAt(index - 1).Tamanho);
+                string downloadAntigo = (apps.ElementAt(index - 1).NumDownloads);
+                string avaliacaAntigo = (apps.ElementAt(index - 1).Avaliacao);
+                (apps.ElementAt(index - 1).Nome) = nome;
+                (apps.ElementAt(index - 1).Tamanho) = tamanho;
+                (apps.ElementAt(index - 1).NumDownloads) = downloads;
+                (apps.ElementAt(index - 1).Avaliacao) = avaliacao;
+                appsDao.Editar(nomeAntigo, nome, tamanhoAntigo, tamanho,downloadAntigo,downloads,avaliacaAntigo,avaliacao);
+            }
+        else
+            {
+                string nomeAntigo = (apps.ElementAt(0).Nome);
+                string tamanhoAntigo = (apps.ElementAt(0).Tamanho);
+                string downloadAntigo = (apps.ElementAt(0).NumDownloads);
+                string avaliacaAntigo = (apps.ElementAt(0).Avaliacao);
+                (apps.ElementAt(0).Nome) = nome;
+                (apps.ElementAt(0).Tamanho) = tamanho;
+                (apps.ElementAt(0).NumDownloads) = downloads;
+                (apps.ElementAt(0).Avaliacao) = avaliacao;
+                appsDao.Editar(nomeAntigo, nome, tamanhoAntigo, tamanho, downloadAntigo, downloads, avaliacaAntigo, avaliacao);
+            }
         }
 
-        public void deleteApp()
+        public void deleteApp(String nome)
         {
-            apps.Remove(apps.ElementAt(index - 1));
+           appsDao.Excluir(nome);
+            if (index - 1 > 0) { apps.Remove(apps.ElementAt(index - 1)); }
+            else apps.Remove(apps.ElementAt(0));
             index = 0;
             nApps--;
+        }
+
+        public void getAppsBD()
+        {
+            appsDao.Listar();
         }
     }
 }

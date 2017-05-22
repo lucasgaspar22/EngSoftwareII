@@ -29,6 +29,8 @@ namespace Projeto_Google
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             listerner = ListernerUnidades.getInstance();
+            listerner.getServicosBD();
+            listerner.nUnidades = listerner.unidades.Count;
             this.isAdm = isAdm;
         }
 
@@ -68,7 +70,7 @@ namespace Projeto_Google
             }
             else
             {
-                listerner.deleteUnidade();
+                listerner.deleteUnidade(unidadeNome.Text);
                 unidadeNome.Text = "";
                 MessageBox.Show("Item excluido com sucesso!");
             }
